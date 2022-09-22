@@ -53,14 +53,16 @@ if ($resultado->num_rows > 0) {
                 <?php
                 $long_task = count($tasks);
                 for ($i = 0; $i < $long_task; $i++) {
-                    echo "<p>" . $tasks[$i] . "</p>";
+                    echo 
+                    "<p>" . $tasks[$i] . " <i class='fa-solid fa-trash'></i>
+                    </p>";
                 }
 
                 if (isset($_POST['taskform'])) {
                     $new_task = $_POST['taskform'];
                     $task_call_bd = "INSERT INTO `tasks` (`id`, `id_user`, `content`) VALUES (NULL, '1', '{$new_task}')";
                     if($conexion->query($task_call_bd) === true){
-                       echo "<p>".$new_task."</p>";
+                       echo "<p>".$new_task." </p>";
                     }
                 
                 } else {
@@ -68,6 +70,7 @@ if ($resultado->num_rows > 0) {
                 }
 
                 ?>
+               
             </div>
 
 

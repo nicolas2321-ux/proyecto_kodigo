@@ -104,6 +104,11 @@ body{font-family: Arial;
 			text-align: left;
 			background-color: #256999;
 		}
+		.content i{
+			position:static;
+			left: 50px;
+			cursor: pointer;
+		}
 		.content{
 			display: flex;
 			flex-wrap: wrap;
