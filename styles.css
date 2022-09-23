@@ -78,7 +78,7 @@ body{font-family: Arial;
 			margin-right: -4px;
 		}
 		.columns .field{
-			width: 80px;
+			width: 80px;	
 		}
 		#form_register{
 			display: none;
@@ -86,33 +86,78 @@ body{font-family: Arial;
 		
 			
 		.maincontent{
-			height:1200px;
+			height:600px;
 			width:600px;
 			 text-align:center;
 			background-color:white;
 			margin: auto;
+			overflow-y: scroll;
 		}
 	
 		.content p{
-			margin: 10px auto ;
 			border-radius: 3px;
-			padding-top:30px;
-			padding-left:10px;
-			padding-bottom: 0;
-			height: 50px;
-			width: 450px;
+			padding-top: 20px;
+			padding-left: 20px;
+			padding-bottom: 0px;
+			height: 70px;
+			width: 350px;
 			text-align: left;
 			background-color: #256999;
+			color: white;
+			font-size: 16px;
+			
 		}
-		.content i{
-			position:static;
-			left: 50px;
+		.delete{
+			position:relative;
+			left: 180px;
+			display: inline-block;
+			margin: 0;
+			top: -80px;
 			cursor: pointer;
+			color: rgb(187, 33, 33);
+		}
+		#edit{
+			position:relative;
+			left: 130px;
+			margin: 0;
+			top: -80px;
+			cursor: pointer;
+			color: rgb(58, 149, 58);
+			display: inline-block;
 		}
 		.content{
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
+			
+		}
+
+		.taskdiv{
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			margin: -10px 90px;
+			row-gap: 10px;
+			column-gap: 10px;
+		}
+
+		#form-task{
+			display: flex;
+			align-items: center;
+			
+			
 		}
 		
-		
+		.container{
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+		.success{
+			background-color: rgb(124, 230,165);
+			border: solid 2px rgb(31,83,44);
+			color: rgb(31,83,44);
+		}

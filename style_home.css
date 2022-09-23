@@ -1,0 +1,95 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-image: radial-gradient(circle at 50% -20.71%, #e459ea 0, #c84ded 16.67%, #a544f0 33.33%, #783cf2 50%, #2538f4 66.67%, #0039f5 83.33%, #003af6 100%);
+}
+.main{
+    margin-top: 50px;
+    width: 600px;
+    height: 800px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    position: relative;
+    overflow-y: scroll;
+
+    background-image: radial-gradient(circle at 50% -20.71%, #ade5ff 0, #7dcefb 25%, #3cb5f2 50%, #009ce9 75%, #0085e0 100%);
+}
+.search_box{
+
+  /* centrar vertical y horizontalmente */
+  position: absolute;
+  top: 75px;
+  left: 150px;
+  margin: auto;
+}
+.content{
+    position: absolute;
+    top: 120px;
+    left: 150px;
+    margin: auto;
+}
+.taskdiv
+{
+    background-color: rgb(127, 127, 234);
+    margin: 10px 0px;
+    height: 90px;
+    width: 300px;
+    border-radius: 10px;
+    padding: 10px;    
+}
+.field{
+    border-color:#ffffff; 
+    border-style:solid; 
+    padding:10px; 
+    font-size:14px; 
+    border-width:2px; 
+    border-radius:12px;
+}
+.taskdiv p{
+    color: rgb(0, 0, 0);
+    position: relative;
+    top: 30px;
+    display: flex;
+    justify-content: left;
+    margin-left: 5px;
+    
+}
+.delete{
+    position: relative;
+    top: -6px;
+    color: rgb(200, 37, 37);
+    left: 250px;
+    cursor: pointer;
+    
+}
+.edit{
+    position: relative;
+    top: -30px;
+    color: rgb(206, 250, 31);
+    left: 210px;
+    cursor: pointer;
+}
+.alert{
+    position: absolute !important;
+    top: 80px;
+    height: 200px;
+    width: 300px;
+    right: 0px;
+}
+.position{
+    position: absolute;
+    margin: auto;
+    top: 130px;
+    left: 110px;
+}
+.main h1{
+    margin: 15px;
+    position: initial;
+    text-align:center;
+}
+
+#btn{
+    margin-top: 12px;
+}
+
+
