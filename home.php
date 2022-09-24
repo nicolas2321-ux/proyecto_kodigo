@@ -16,7 +16,7 @@ $bd = "proyecto_kodigo";
 $conexion = new mysqli($dominio, $nombre, $password_bd, $bd);
 
 
-$sql = "SELECT * FROM `users` WHERE `username` LIKE 'nick2321' AND `password` LIKE 'palodecoco2321'";
+$sql = "SELECT * FROM `users` WHERE `user` LIKE 'nick2321' AND `password` LIKE 'palodecoco2321'";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows > 0) {
     $task = "SELECT * FROM `tasks` WHERE `id_user` = 1";
