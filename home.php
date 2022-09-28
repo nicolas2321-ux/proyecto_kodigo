@@ -57,8 +57,8 @@ if ($resultado->num_rows > 0) { //comprobar si la query tiene una respuesta
 
 
                     <div class='taskdiv'>
-                    <p><?php echo $ids[$i] ?>-
-                                <?php echo $tasks[$i];  //for para recorrer las tareas  ?>    </p>
+                                
+                                <p> <?php echo $tasks[$i];  //for para recorrer las tareas  ?>    </p>
 
                         <form id='formulario <?php echo $ids[$i]?>' class='form-' action='home.php' method='POST'>
                         
@@ -104,8 +104,13 @@ if ($resultado->num_rows > 0) { //comprobar si la query tiene una respuesta
                     }
                 } else if (isset($_POST['eliminar'])) { //si eliminar esta definido
                     $erase = $_POST['eliminar']; //sacar el valor de eliminar (id)
-                    $erase_call = eraseTask($erase); //llamada a la BD
-                    if($conexion->query($erase_call)===true){?>
+                    $erase_call = eraseTask($erase);
+                    $erase_update = resetID();
+                    //llamada a la BD
+
+                    if($conexion->query($erase_call)===true){
+                        $conexion->query($erase_update);
+                        ?>
                         <div  class ="alert alert-primary" role="alert">
                                 <p class="alertP">Tarea eliminada correctamente</p>
                                 <button onclick="accept()" class="btn btn-info"> Aceptar</button>

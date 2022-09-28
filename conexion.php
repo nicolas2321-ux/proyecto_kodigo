@@ -38,3 +38,8 @@ function editTask($edit_id, $edit_confirm){
     $editTask = "UPDATE `tasks` SET `content` = '{$edit_confirm}' WHERE `tasks`.`id` = {$edit_id}";
     return $editTask;
 }
+
+function resetID(){
+    $reset = "ALTER TABLE `tasks` AUTO_INCREMENT = 0";
+    return $reset; 
+}
