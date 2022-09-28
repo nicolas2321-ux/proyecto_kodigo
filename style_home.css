@@ -1,36 +1,36 @@
 body{
     display: flex;
     justify-content: center;
-    background-image: radial-gradient(circle at 50% -20.71%, #e459ea 0, #c84ded 16.67%, #a544f0 33.33%, #783cf2 50%, #2538f4 66.67%, #0039f5 83.33%, #003af6 100%);
+    background-image: linear-gradient(135deg, #003e98 0, #003a96 8.33%, #003593 16.67%, #162f8e 25%, #392887 33.33%, #4e1f80 41.67%, #5d1377 50%, #69006d 58.33%, #730063 66.67%, #7a0058 75%, #80004d 83.33%, #830042 91.67%, #850036 100%);
 }
 .main{
     margin-top: 50px;
     width: 600px;
-    height: 800px;
+    height: 700px;
     border-radius: 10px;
     padding: 10px 20px;
     position: relative;
     overflow-y: scroll;
 
-    background-image: radial-gradient(circle at 50% -20.71%, #ade5ff 0, #7dcefb 25%, #3cb5f2 50%, #009ce9 75%, #0085e0 100%);
+    background-image: linear-gradient(135deg, #d3d7f0 0, #d7d6ef 8.33%, #dbd5ee 16.67%, #dfd4ec 25%, #e2d3ea 33.33%, #e6d2e8 41.67%, #e9d1e5 50%, #ecd0e2 58.33%, #eed0df 66.67%, #f0cfdc 75%, #f2cfd9 83.33%, #f3cfd5 91.67%, #f4cfd2 100%);
 }
 .search_box{
 
   /* centrar vertical y horizontalmente */
   position: absolute;
-  top: 75px;
+  top: 85px;
   left: 150px;
   margin: auto;
 }
 .content{
     position: absolute;
-    top: 120px;
+    top: 160px;
     left: 150px;
     margin: auto;
 }
 .taskdiv
 {
-    background-color: rgb(127, 127, 234);
+    background-color: rgb(165, 165, 202);
     margin: 10px 0px;
     height: 90px;
     width: 300px;

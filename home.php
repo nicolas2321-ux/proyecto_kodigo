@@ -1,4 +1,5 @@
 <?php
+include 'conexion.php';
 
 
 
@@ -8,23 +9,17 @@ $password = $_POST['password'];
 $tasks = [];
 $ids = [];
 
-$dominio = "localhost";
-$nombre = "root";
-$password_bd = "palodecoco2321";
-$bd = "proyecto_kodigo";
+$conexion = connection_BD(); //conexion a la BD
 
-$conexion = new mysqli($dominio, $nombre, $password_bd, $bd);
+$users = getUsers(); //sacar el usuario relacionado 
+$resultado = $conexion->query($users); //query
+if ($resultado->num_rows > 0) { //comprobar si la query tiene una respuesta
+    $task = getTasks(); //pedir a la BD las tareas relacionadas con el usuario
+    $call_result_task = $conexion->query($task); //query
+    while ($row = $call_result_task->fetch_assoc()) { //while para recorrer toda la tabla
+        $tasks[] = $row['content']; //guardar las tareas
 
-
-$sql = "SELECT * FROM `users` WHERE `user` LIKE 'nick2321' AND `password` LIKE 'palodecoco2321'";
-$resultado = $conexion->query($sql);
-if ($resultado->num_rows > 0) {
-    $task = "SELECT * FROM `tasks` WHERE `id_user` = 1";
-    $call_result_task = $conexion->query($task);
-    while ($row = $call_result_task->fetch_assoc()) {
-        $tasks[] = $row['content'];
-
-        $ids[] = $row['id'];
+        $ids[] = $row['id']; //guardar el id de las tareas
     }
 
 ?>
@@ -49,6 +44,7 @@ if ($resultado->num_rows > 0) {
                 <form action="home.php" method="post" class="form">
                     <input type="text" class="field" name="taskform" placeholder="Agrega tu tarea" required>
                     <input type="submit" class="btn btn-success" value="add">
+                    <!-- formulario para agregar una tarea -->
 
                 </form>
             </div>
@@ -62,17 +58,23 @@ if ($resultado->num_rows > 0) {
 
                     <div class='taskdiv'>
                     <p><?php echo $ids[$i] ?>-
-                                <?php echo $tasks[$i]; ?> </p>
+                                <?php echo $tasks[$i];  //for para recorrer las tareas  ?>    </p>
 
                         <form id='formulario <?php echo $ids[$i]?>' class='form-' action='home.php' method='POST'>
+                        
+
                             <i class='fa-solid fa-trash delete' id='<?php echo $ids[$i] ?>' onclick='eliminarTask(this)' name='completar'></i>
                             <input type="hidden" value="<?php echo $ids[$i]?>" name="eliminar">
+
+                            <!-- formualario para eliminar una tarea -->
                         </form>
 
 
                         <form id='edit <?php echo $ids[$i]?>' class='form-' action='home.php' method='POST'>
                             <i class="fa-solid fa-pen-to-square edit" id='<?php echo $ids[$i] ?>' onclick='editTask(this)' name='completar'></i>
                             <input type="hidden" value="<?php echo $ids[$i]?>" name="editar">
+
+                            <!-- formulario para editar una tarea -->
                             
                         </form>
                     </div>
@@ -82,57 +84,62 @@ if ($resultado->num_rows > 0) {
                 }
 
 
-                if (isset($_POST['taskform'])) {
-                    $new_task = $_POST['taskform'];
-                    $task_call_bd = "INSERT INTO `tasks` (`id`, `id_user`, `content`) VALUES (NULL, '1', '{$new_task}')";
-                    if ($conexion->query($task_call_bd) === true && $new_task != "") {
+                if (isset($_POST['taskform'])) { //si al recibir el metodo post taskform esta definido
+                    $new_task = $_POST['taskform']; //sacar el valor del input
+                    $task_call_bd = newTask($new_task); //llamada a la BD
+                    if ($conexion->query($task_call_bd) === true && $new_task != "") { //query
                         
                             ?>
             
             
                                 <div class ="alert alert-primary" role="alert">
                                 <p class="alertP">Tarea agregada correctamente</p>
-                                <button onclick="accept()" class="btn btn-info"> Aceptar</button>
+                                <button onclick="accept()" class="btn btn-info"> Aceptar</button> 
+                                <!-- notificacion -->
                                 </div>
                                 
             
                             <?php
                             
                     }
-                } else if (isset($_POST['eliminar'])) {
-                    $erase = $_POST['eliminar'];
-                    $erase_call = "DELETE FROM tasks WHERE `tasks`.`id` = {$erase}";
+                } else if (isset($_POST['eliminar'])) { //si eliminar esta definido
+                    $erase = $_POST['eliminar']; //sacar el valor de eliminar (id)
+                    $erase_call = eraseTask($erase); //llamada a la BD
                     if($conexion->query($erase_call)===true){?>
                         <div  class ="alert alert-primary" role="alert">
                                 <p class="alertP">Tarea eliminada correctamente</p>
                                 <button onclick="accept()" class="btn btn-info"> Aceptar</button>
+                                <!-- notificacion -->
                                 </div>
                     <?php
                             }
                 } 
-                else if(isset($_POST['editar'])){
-                    $editar = $_POST['editar'];
+                else if(isset($_POST['editar'])){ //si editar esta definido
+                    $editar = $_POST['editar']; //sacar el valor de editar (id)
                     ?>
                     <div  class ="alert alert-primary" role="alert">
                     <form action="home.php" id="confirm_edit <?php echo $ids[$i]?>" method="POST">
                     <input type="text" placeholder="Edite su tarea" name="confirm" class="field">
                     <input type="hidden" name="id" value="<?php echo $editar; ?>">
                     <input type="submit"  class="btn btn-info" id="btn">
+
+                    <!-- nuevo formulario donde ingresara el nuevo valor -->
                     </form>
                     </div>
                     <?php
                     
                 }
-                else if(isset($_POST['confirm'])){
-                   $edit_confirm = $_POST['confirm'];
-                   $edit_id = $_POST['id'];
-                   $edit_call = "UPDATE `tasks` SET `content` = '{$edit_confirm}' WHERE `tasks`.`id` = {$edit_id}";
+                else if(isset($_POST['confirm'])){ //confirmacion de editar tarea
+                   $edit_confirm = $_POST['confirm']; //sacar el valor del input donde ingresa la tarea
+                   $edit_id = $_POST['id']; //sacar el valor del id
+                   $edit_call = editTask($edit_id, $edit_confirm); //llamada a la base de datos
                    if($conexion-> query($edit_call) === true){
                     ?>
                      <div  class ="alert alert-primary" role="alert">
                                 <p class="alertP">Tarea editada correctamente</p>
                                 <button onclick="accept()" class="btn btn-info"> Aceptar</button>
                                 </div>
+                                <!-- notificacion -->
                     <?php
                    }
                 }
@@ -144,25 +151,7 @@ if ($resultado->num_rows > 0) {
 
         </div>
     </body>
-    <script>
-        function eliminarTask(e) {
-            var id = "formulario " + e.id;
-            var formulario = document.getElementById(id);
-            formulario.submit();
-            console.log(e.id)
-
-        }
-        function editTask(e) {
-            var id = "edit " + e.id;
-            var formulario = document.getElementById(id);
-            formulario.submit();
-            console.log(e.id)
-
-        }
-        function accept(){
-            location.href="home.php";
-        }
-    </script>
+            <script src="main.js"> </script>
 
     </html>
 
